@@ -176,14 +176,14 @@
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PPRDIR/../AES_Project2/AES_Project_Vivado/AES_Project_Vivado.srcs/sources_1/new/baud_rate_generator.v">
+      <File Path="$PSRCDIR/sources_1/new/baud_rate_generator.v">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PPRDIR/../AES_Project2/AES_Project_Vivado/AES_Project_Vivado.srcs/sources_1/new/uart_transmitter.v">
+      <File Path="$PSRCDIR/sources_1/new/uart_transmitter.v">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>
