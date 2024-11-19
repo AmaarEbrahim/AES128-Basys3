@@ -45,10 +45,10 @@ module test_uart_transmitter128(
     reg we = 0;
     dist_mem_gen_0 in(
         .a(address),
-        .d(d),
-        .clk(clk),
-        .spo(data),
-        .we(we)
+//        .d(d),
+//        .clk(clk),
+        .spo(data)
+//        .we(we)
     );
     reg [127:0] plaintext = 128'hAEC1BEF060B67196537A44A93388F426;
     uart_transmitter128 inst(.i_start(start), .i_clk100MHz(clk), .i_text(data), .o_uartFinished(done), .tx(tx), .isidle(isidle));

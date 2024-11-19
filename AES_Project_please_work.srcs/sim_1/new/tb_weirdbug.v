@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date: 10/07/2024 09:07:08 PM
+// Create Date: 10/24/2024 10:51:04 PM
 // Design Name: 
-// Module Name: ShiftRows
+// Module Name: tb_weirdbug
 // Project Name: 
 // Target Devices: 
 // Tool Versions: 
@@ -20,14 +20,19 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module ShiftRows(
-        input [127:0] di,
-        output [127:0] do
+module tb_weirdbug(
+
     );
+    reg data_ready_sig = 0;
+    initial begin
+        #5 data_ready_sig = 1;
+        #2 data_ready_sig = 0;
+    end
     
-    wire [7:0] w0, w1, w2, w3, w4, w5, w6, w7, w8, w9, w10, w11, w12, w13, w14, w15;
-    
-    assign {w15, w14, w13, w12, w11, w10, w9, w8, w7, w6, w5, w4, w3, w2, w1, w0} = di;
-    
-    assign do = {w15, w10, w5, w0, w11, w6, w1, w12, w7, w2, w13, w8, w3, w14, w9, w4};
+     reg from_rec_to_trans = 0;
+     always@(data_ready_sig) begin
+        if (data_ready_sig == 1) begin
+            from_rec_to_trans = 1;
+        end
+     end
 endmodule

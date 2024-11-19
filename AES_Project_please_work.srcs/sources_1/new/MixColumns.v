@@ -65,7 +65,7 @@ module Multiplier(
     assign row4_word = {row3_word[7:0], row3_word[31:8]};
     Row inst4 (.i_word(row4_word), .o_byte(row4_byte));
 
-    assign o_word = {row4_byte, row3_byte, row2_byte, row1_byte};
+    assign o_word = {row1_byte, row4_byte, row3_byte, row2_byte};
 
 
 endmodule
@@ -89,18 +89,18 @@ module Row(
 );
 
 
-    wire [8:0] e1 = i_word[7:0] << 1;
+    wire [8:0] e1 = i_word[31:24] << 1;
     wire [7:0] e1_out;
     PolynomialReduction p1(.i_dividend(e1), .o_remainder(e1_out));
     
     // 
-    wire [8:0] e2 = (i_word[15:8] << 1) ^ i_word[15:8];
+    wire [8:0] e2 = (i_word[23:16] << 1) ^ i_word[23:16];
     wire [7:0] e2_out;
     PolynomialReduction p2(.i_dividend(e2), .o_remainder(e2_out));
     
-    wire [7:0] e3 = i_word[23:16];
+    wire [7:0] e3 = i_word[15:8];
     
-    wire [7:0] e4 = i_word[31:24];
+    wire [7:0] e4 = i_word[7:0];
     
     assign o_byte = (e1_out ^ e2_out) ^ (e3 ^ e4);
     

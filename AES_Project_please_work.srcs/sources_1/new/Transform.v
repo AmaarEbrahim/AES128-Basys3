@@ -28,7 +28,7 @@ module Transform(
     
     wire [31:0] word1, word2, word3, word4;
     
-    assign {word4, word3, word2, word1} = i_key;
+    assign {word1, word2, word3, word4} = i_key;
     
     wire [31:0] word1_out, word2_out, word3_out, word4_out;
     
@@ -39,5 +39,5 @@ module Transform(
     assign word3_out = word3 ^ word2_out;
     assign word4_out = word4 ^ word3_out;
     
-    assign o_key = {word4_out, word3_out, word2_out, word1_out};
+    assign o_key = {word1_out, word2_out, word3_out, word4_out};
 endmodule

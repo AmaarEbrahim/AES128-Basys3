@@ -35,7 +35,7 @@ module tb_Round(
     reg [7:0] addition;
     reg [127:0] added;
     
-    reg isRound10 = 1;
+    reg isRound10 = 0;
     
     initial begin
     
@@ -54,7 +54,7 @@ module tb_Round(
         
         $readmemh("block128_02.mem", block_mem, 0, 0);
         block = block_mem[0];
-        
+//        block = "2e1ece2fa62b1c1b60739f7a639ffd81
         // in round 1, xor the block and key... hence this line
         added = block ^ key;
     end

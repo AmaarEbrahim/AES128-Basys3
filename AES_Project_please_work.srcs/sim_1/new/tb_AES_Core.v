@@ -38,7 +38,7 @@ module tb_AES_Core(
     
     reg i_start = 1;
     initial begin
-//        #50 i_start = 0;
+        #50 i_start = 0;
     end
     
     

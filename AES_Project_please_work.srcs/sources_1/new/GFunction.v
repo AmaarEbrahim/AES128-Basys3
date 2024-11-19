@@ -30,7 +30,7 @@ module GFunction(
 
     wire [7:0] byte1, byte2, byte3, byte4;
     
-    assign {byte4, byte3, byte2, byte1} = i_word;
+    assign {byte1, byte2, byte3, byte4} = i_word;
     
     wire [7:0] byte1_out, byte2_out, byte3_out, byte4_out;
     
@@ -43,5 +43,5 @@ module GFunction(
     
     assign byte1_out = to_addition ^ i_addition;
     
-    assign o_word = {byte4_out, byte3_out, byte2_out, byte1_out};
+    assign o_word = {byte1_out, byte2_out, byte3_out, byte4_out};
 endmodule
