@@ -46,6 +46,7 @@ module AES(
     reg startReceiving;
     reg startSending;
     reg startEncrypting;
+    reg [127:0] dataToSendO;
     
     reg o_startt = 0;
 //    always@(i_start) begin
@@ -69,30 +70,30 @@ module AES(
             end
             RX_BLOCK: begin 
                 if (uartFinishedReceivingPlaintext)
-                    next_state = RX_KEY;
+                    next_state = TX_BLOCK;
                 else
                     next_state = RX_BLOCK;
             end
-//            TX_BLOCK: begin
-//                if (uartFinishedTransmittingCiphertext)
-//                    next_state = RX_KEY;
-//                else
-//                    next_state = TX_BLOCK;
+            TX_BLOCK: begin
+                if (uartFinishedTransmittingCiphertext)
+                    next_state = RX_KEY;
+                else
+                    next_state = TX_BLOCK;
                 
-//            end
+            end
             RX_KEY: begin
                 if (uartFinishedReceivingPlaintext)
-                    next_state = PROCESSING;
+                    next_state = TX_KEY;
                 else
                     next_state = RX_KEY;
             end
-//            TX_KEY: begin
-//                if (uartFinishedTransmittingCiphertext)
-//                    next_state = PROCESSING;
-//                else
-//                    next_state = TX_KEY;
+            TX_KEY: begin
+                if (uartFinishedTransmittingCiphertext)
+                    next_state = PROCESSING;
+                else
+                    next_state = TX_KEY;
                 
-//            end            
+            end            
             PROCESSING: begin 
                 if (encryptionFinished)
                     next_state = TX;
@@ -122,21 +123,26 @@ module AES(
                 startReceiving = 1;
             end
             TX_BLOCK: begin
-//                block = receivedPlaintext;
+                block = receivedPlaintext;
+                dataToSendO = receivedPlaintext;
                 startSending = 1;
+//                dataToSendO = block;
             end
             RX_KEY: begin
                 startReceiving = 1;
             end
             TX_KEY: begin
-//                key = receivedPlaintext;
+                key = receivedPlaintext;
+                dataToSendO = receivedPlaintext;
                 startSending = 1;
+//                dataToSendO = key;
             end
             PROCESSING: begin
 //                key = receivedPlaintext;
                 startEncrypting = 1;
             end
             TX: begin 
+                dataToSendO = ciphertext;
                 startSending = 1;
             end
         endcase     
@@ -148,17 +154,17 @@ module AES(
         .clk_out1(clk_10MHz)
     );    
     
-    wire [127:0] key;
-    wire [127:0] block;  
-    reg [3:0] address = 0;
-    dist_mem_gen_0 in(
-        .a(address),
-        .spo(block)
-    );
-    dist_mem_KEY in2(
-        .a(address),
-        .spo(key)
-    );
+    reg [127:0] key;
+    reg [127:0] block;  
+//    reg [3:0] address = 0;
+//    dist_mem_gen_0 in(
+//        .a(address),
+//        .spo(block)
+//    );
+//    dist_mem_KEY in2(
+//        .a(address),
+//        .spo(key)
+//    );
     
     wire uartFinishedReceivingPlaintext;
     wire [128:0] receivedPlaintext;
@@ -176,17 +182,12 @@ module AES(
     uart_transmitter128 inst1(
             .i_start(startSending),
             .i_clk100MHz(i_clk100MHz),
-            .i_text(ciphertext),
+            .i_text(dataToSendO),
             .o_uartFinished(uartFinishedTransmittingCiphertext),
             .tx(o_tx),
             .isidle(uartIdle)
         );
         
-    wire textToSend;
-//    assign textToSend = (state == TX_BLOCK) ? block :
-//                        (state == TX_KEY) ? key :
-//                        ciphertext;
-    assign textToSend = block;
 
     wire o_isidle;
     wire encryptionFinished;

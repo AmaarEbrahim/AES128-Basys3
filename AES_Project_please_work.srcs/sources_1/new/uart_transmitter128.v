@@ -38,7 +38,8 @@ module uart_transmitter128
     generate
         genvar i;
         for (i = 0; i < 32; i = i+1) begin
-            HexToAscii inst(.hex(i_text[(i*4)+3:i*4]), .ascii(ascii_pt[(i*8)+7:i*8]));
+//            HexToAscii inst(.hex(i_text[(i*4)+3:i*4]), .ascii(ascii_pt[(i*8)+7:i*8]));
+            HexToAscii inst(.hex(i_text[(i*4)+3:i*4]), .ascii(ascii_pt[((31 - i)*8) +: 8]));
         end
     endgenerate
     

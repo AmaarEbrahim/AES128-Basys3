@@ -723,6 +723,7 @@
     <FileSet Name="dist_mem_gen_0" Type="BlockSrcs" RelSrcDir="$PSRCDIR/dist_mem_gen_0" RelGenDir="$PGENDIR/dist_mem_gen_0">
       <File Path="$PSRCDIR/sources_1/ip/dist_mem_gen_0/dist_mem_gen_0.xci">
         <FileInfo>
+          <Attr Name="AutoDisabled" Val="1"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
@@ -776,6 +777,7 @@
     <FileSet Name="dist_mem_KEY" Type="BlockSrcs" RelSrcDir="$PSRCDIR/dist_mem_KEY" RelGenDir="$PGENDIR/dist_mem_KEY">
       <File Path="$PSRCDIR/sources_1/ip/dist_mem_KEY/dist_mem_KEY.xci">
         <FileInfo>
+          <Attr Name="AutoDisabled" Val="1"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
