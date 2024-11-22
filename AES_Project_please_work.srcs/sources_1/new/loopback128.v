@@ -25,25 +25,39 @@ module loopback128(
         input reset,
         input rx,
         input clk,
-        output transmitIdle,
-        output tx,
-        output [5:0] receiveState
+        output tx
     );
+
+    wire done;
+    wire [128:0] total_data;
+
+    uart_receiver128 receiver(
+            .clk(clk),
+            .reset(reset),
+            .start(i_start),
+            .rx(rx),
+            .done(done),
+            .total_data(total_data)
+        );
         
-        wire [127:0] received;    
-        wire receiveFinished;
-        uart_receiver128_2 i1(.reset(reset), .i_start(i_start), .rx(rx), .i_clk100MHz(clk), .received(received), .o_uartFinished(receiveFinished), .state(receiveState));
-        
-        reg send = 0;
-        
-        
-        uart_transmitter128 i2(.i_start(send), .i_clk100MHz(clk), .i_text(received), .tx(tx), .isidle(transmitIdle));
-        
-        always@(posedge clk) begin
-            if (receiveFinished)
-                send = 1;
-            else
-                send = 0;
-        end
+
+    uart_transmitter128 transmitter(
+        .i_start(start_transmit),
+        .i_clk100MHz(clk),
+        .i_text(total_data),
+        .o_uartFinished(),
+        .tx(tx),
+        .isidle()
+    );
+    
+    reg start_transmit = 0;
+    
+    always@(posedge clk) begin
+        if (done)
+            start_transmit = 1;
+        else
+            start_transmit = 0;
+            
+    end
         
 endmodule
