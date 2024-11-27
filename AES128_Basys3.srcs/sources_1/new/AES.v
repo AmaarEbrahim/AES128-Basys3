@@ -25,6 +25,7 @@ module AES(
         input i_clk100MHz,
         input i_reset,
         input i_start,
+        
         output o_tx,
         output [2:0] state,
         output o_start

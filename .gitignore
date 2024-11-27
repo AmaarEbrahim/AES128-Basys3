@@ -1,10 +1,9 @@
-AES_Project_please_work.cache
-AES_Project_please_work.gen
-
-AES_Project_please_work.hw
-AES_Project_please_work.ip_user_files
-AES_Project_please_work.runs
-AES_Project_please_work.sim
+AES128_Basys3.cache
+AES128_Basys3.gen
+AES128_Basys3.hw
+AES128_Basys3.ip_user_files
+AES128_Basys3.runs
+AES128_Basys3.sim
 *.str
 *.jou
 *.log
