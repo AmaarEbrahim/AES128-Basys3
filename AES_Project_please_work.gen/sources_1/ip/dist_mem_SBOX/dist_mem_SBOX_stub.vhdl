@@ -1,10 +1,10 @@
 -- Copyright 1986-2021 Xilinx, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2021.1 (win64) Build 3247384 Thu Jun 10 19:36:33 MDT 2021
--- Date        : Wed Oct 23 23:29:25 2024
--- Host        : Amaar-Desktop running 64-bit major release  (build 9200)
--- Command     : write_vhdl -force -mode synth_stub {c:/Users/amaar/Documents/Personal
---               Documents/AES_Project_please_work/AES_Project_please_work.gen/sources_1/ip/dist_mem_SBOX/dist_mem_SBOX_stub.vhdl}
+-- Date        : Tue Nov 26 20:08:04 2024
+-- Host        : Amaar-Laptop running 64-bit major release  (build 9200)
+-- Command     : write_vhdl -force -mode synth_stub
+--               c:/Users/amaar/git/AES128-Basys3/AES_Project_please_work.gen/sources_1/ip/dist_mem_SBOX/dist_mem_SBOX_stub.vhdl
 -- Design      : dist_mem_SBOX
 -- Purpose     : Stub declaration of top-level module interface
 -- Device      : xc7a35tcpg236-1
